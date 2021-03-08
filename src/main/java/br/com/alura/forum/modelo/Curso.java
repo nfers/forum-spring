@@ -13,6 +13,9 @@ public class Curso {
 	private String nome;
 	private String categoria;
 
+	public Curso() {
+		
+	}
 
 	@Override
 	public int hashCode() {

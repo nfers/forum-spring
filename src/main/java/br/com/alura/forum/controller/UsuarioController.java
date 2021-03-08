@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.com.alura.forum.modelo.Topico;
 import br.com.alura.forum.modelo.Usuario;
 
 @Controller
@@ -18,6 +17,6 @@ public class UsuarioController {
 	public List<Usuario> lista() {
 		Usuario usuario = new Usuario();
 		
-		return Arrays.asList(null);
+		return Arrays.asList(usuario);
 	}
 }

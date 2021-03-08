@@ -8,6 +8,10 @@ import br.com.alura.forum.modelo.Topico;
 
 public interface TopicoRepository extends JpaRepository<Topico, Long>{
 
+	/*Navega dentro da entidade Topico no relacionamento Curso e 
+	o hibernate monta a query para o nome do curso*/
+	List<Topico> findByCursoNome(String nomeCurso);
+
 	
 	
 }
