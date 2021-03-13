@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +37,7 @@ public class TopicosController {
 	private CursoRepository cursoRepository;
 	
 	@GetMapping
+	@Transactional
 	public List<TopicoDTO> lista(String nomeCurso) {
 		
 		if (nomeCurso == null) {
@@ -49,6 +51,7 @@ public class TopicosController {
 	}
 	
 	@GetMapping("/{id}")
+	@Transactional
 	public DetalhesTopicoDTO detalhar(@PathVariable Long id) {
 		Topico topico = topicoRepository.getOne(id);
 		return new DetalhesTopicoDTO(topico);
@@ -66,6 +69,7 @@ public class TopicosController {
 	}
 	
 	@PostMapping
+	@Transactional
 	public ResponseEntity<TopicoDTO> Create(@RequestBody @Valid TopicoForm topicoForm, UriComponentsBuilder uriBuilder) {
 		
 		Topico topico = topicoForm.converter(cursoRepository);
@@ -76,5 +80,16 @@ public class TopicosController {
 		
 		return ResponseEntity.created(uri).body(new TopicoDTO(topico));
 	}
+	
+	
+	@DeleteMapping("/{id}")
+	@Transactional
+	public ResponseEntity<?> Delete(@PathVariable Long id) {
+		
+		topicoRepository.deleteById(id);
+		
+		return ResponseEntity.ok().build();
+	}
+
 	
 }
